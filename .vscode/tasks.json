@@ -1,0 +1,50 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Build and Run iOS Simulator",
+            "type": "shell",
+            "command": "xcodebuild",
+            "args": [
+                "-project", "ClothifyMobileApp.xcodeproj",
+                "-scheme", "ClothifyMobileApp",
+                "-destination", "platform=iOS Simulator,name=iPhone 16,OS=18.2",
+                "build"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Install and Launch in Simulator",
+            "type": "shell",
+            "command": "xcrun",
+            "args": [
+                "simctl", "install", "iPhone 16",
+                "/Users/sasankamalshan/Library/Developer/Xcode/DerivedData/ClothifyMobileApp-gezwnyefbeihpqbrvrciuaakukyv/Build/Products/Debug-iphonesimulator/ClothifyMobileApp.app"
+            ],
+            "dependsOn": "Build and Run iOS Simulator",
+            "group": "build"
+        },
+        {
+            "label": "Quick Reload",
+            "type": "shell",
+            "command": "xcodebuild -project ClothifyMobileApp.xcodeproj -scheme ClothifyMobileApp -destination 'platform=iOS Simulator,name=iPhone 16,OS=18.2' build && xcrun simctl install 'iPhone 16' /Users/sasankamalshan/Library/Developer/Xcode/DerivedData/ClothifyMobileApp-gezwnyefbeihpqbrvrciuaakukyv/Build/Products/Debug-iphonesimulator/ClothifyMobileApp.app && xcrun simctl launch 'iPhone 16' sasanka.ClothifyMobileApp",
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared"
+            }
+        }
+    ]
+}
